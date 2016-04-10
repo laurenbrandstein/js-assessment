@@ -10,6 +10,25 @@ exports.flowControlAnswers = {
     //
     // otherwise the function should return the number, or false if no number
     // was provided or the value provided is not a number
+    var isDivisibleByFive = (num % 5 === 0),
+        isDivisibleByThree = (num % 3 === 0),
+        result = '';
 
+    if(isDivisibleByThree || isDivisibleByFive) {
+        if(isDivisibleByThree) {
+            result += 'fizz';
+        }
+        if(isDivisibleByFive) {
+            result += 'buzz';
+        }
+    }
+    else if(typeof num === 'number') {
+        result = num;
+    }
+    else {
+        result = false;
+    }
+
+    return result;
   }
 };
