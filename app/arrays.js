@@ -30,9 +30,14 @@ exports.arraysAnswers = {
   remove : function(arr, item) {
       var i;
 
-      for(i = 0; i < arr.length; i++) {
+      for(i = 0; i < arr.length;) {
+          // If deleting an item, don't increment the index,
+          // since array contents will shift backwards by 1
           if(arr[i] === item) {
               arr.splice(i, 1);
+          }
+          else {
+              i++;
           }
       }
 
@@ -40,16 +45,7 @@ exports.arraysAnswers = {
   },
 
   removeWithoutCopy : function(arr, item) {
-      var i;
-
-      for(i = 0; i < arr.length; i++) {
-          if(arr[i] === item) {
-              arr.splice(i, 1);
-              i -= 1;
-          }
-      }
-
-      return arr;
+      return this.remove(arr, item);
   },
 
   append : function(arr, item) {
