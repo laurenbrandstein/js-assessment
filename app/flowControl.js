@@ -14,7 +14,10 @@ exports.flowControlAnswers = {
         isDivisibleByThree = (num % 3 === 0),
         result = '';
 
-    if(isDivisibleByThree || isDivisibleByFive) {
+    if(typeof num !== 'number') {
+        return false;
+    }
+    else if(isDivisibleByThree || isDivisibleByFive) {
         if(isDivisibleByThree) {
             result += 'fizz';
         }
@@ -22,11 +25,8 @@ exports.flowControlAnswers = {
             result += 'buzz';
         }
     }
-    else if(typeof num === 'number') {
-        result = num;
-    }
     else {
-        result = false;
+        result = num;
     }
 
     return result;
