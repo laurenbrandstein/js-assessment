@@ -17,7 +17,6 @@ exports.objectsAnswers =  {
         results.push(key + ': ' + obj[key]);
       });
 
-
       return results;
   }
 };
