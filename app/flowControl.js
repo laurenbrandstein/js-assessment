@@ -15,7 +15,7 @@ exports.flowControlAnswers = {
         result = '';
 
     if(typeof num !== 'number') {
-        return false;
+        result = false;
     }
     else if(isDivisibleByThree || isDivisibleByFive) {
         if(isDivisibleByThree) {
