@@ -34,8 +34,19 @@ exports.functionsAnswers = {
   },
 
   partial : function(fn, str1, str2) {
-      return function(str3) {
-          return fn(str1, str2, str3);
+      var args = Array.from(arguments);
+      // Remove the function, leave the args
+      args.shift();
+
+      return function func() {
+          args = args.concat(Array.from(arguments));
+
+          if(args.length === fn.length) {
+              return fn.apply(null, args);
+          }
+          else {
+              return func;
+          }
       };
   },
 
@@ -80,52 +91,17 @@ exports.functionsAnswers = {
   },
 
   curryIt : function(fn) {
-      return function(arg) {
-          if(args.length === fn.length) {
-              return fn.apply(this, args);
-          }
-      };
+      var args = [];
 
-      return function(arg) {
-          // Concat a new array from any original arguments
-          // that may have been optionally passed on the first
-          // call, plus any new ones optionally passed now 
-          var newArgs = Array.from(arguments),
-              allArgs = originalArgs.concat(newArgs);
+      return function curry(arg) {
+          args.push(arg);
 
           if(args.length === fn.length) {
-              return fn.apply(this, args);
+              return fn.apply(null, args);
           }
           else {
-              return function(arg) {
-                  args.push(arg);
-              };
+              return curry;
           }
       };
-
-      // var argToPass;
-      //
-      // if(typeof arguments[0] !== 'function') {
-      //     argToPass = arguments[0];
-      // }
-      // return function(arg) {
-      //     if(args.length === fn.length) {
-      //         return fn.apply(this, args);
-      //     }
-      //     else {
-      //         return function(arg) {
-      //             var args
-      //         }
-      //     }
-      // };
-      //
-      // return function() {
-      //     var args = args.push(arg) || arg;
-      //     return function(arg) {
-      //         if(args.length === fn.length) {
-      //             return fn.apply(this, args);
-      //         }
-      //     };
-      // };
   }
 };
