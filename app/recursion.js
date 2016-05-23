@@ -34,7 +34,7 @@ exports.recursionAnswers = {
               }
           }
       };
-      
+
       if(dirName !== undefined) {
           findFolder(data, dirName);
       }
@@ -43,12 +43,34 @@ exports.recursionAnswers = {
       }
 
       getFiles(directoryToList);
-      
+
       return fileNames;
   },
 
   permute: function(arr) {
+      var i,
+          mutate,
+          permutations = [],
+          j;
 
+      permutations.push(arr);
+
+      mutate = function(arr) {
+          var mutant = arr.slice();
+
+          mutant[i] = arr[j];
+          mutant[j] = arr[i];
+
+          return mutant;
+      };
+
+      for(i = (arr.length - 1); i > 0; i--) {
+          for(j = (arr.length - 2); j > -1; j--) {
+              permutations.push(mutate(arr));
+          }
+      }
+
+      return permutations;
   },
 
   fibonacci: function(n) {
