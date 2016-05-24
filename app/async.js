@@ -8,13 +8,14 @@ exports.asyncAnswers = {
   },
 
   manipulateRemoteData : function(url) {
-      var people;
-      $.getJSON(url, function(data) {
-           people = data.people.sort();
+      var $deferred = $.getJSON(url, function(data) {
+          var people = [];
+          data.people.forEach(function(element, i) {
+              people.push(element.name);
+          });
+          return people.sort();
       });
-      console.log(people);
-      return new Promise(function(resolve, reject) {
-          resolve(people);
-      });
+
+      return $deferred;
   }
 };
